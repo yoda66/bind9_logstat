@@ -7,9 +7,15 @@ and DNS query type.
 Uses both regular expressions, and the Counter() dictionary from the
 Python collections module.
 
+*Usage:*
+
+`usage: bind_logstat.py [-h] [--exclude [EXCLUDE [EXCLUDE ...]]]
+                       [--qtype [QTYPE [QTYPE ...]]] [--client CLIENT]
+                       [--domain DOMAIN] [--view VIEW] [--topn TOPN] [--debug]
+                       filename`
+
 
 **Author: Joff Thyer**
-
 **Black Hills Information Security**
 
 
