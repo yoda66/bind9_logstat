@@ -3,8 +3,11 @@
 import re
 import sys
 
-# define and compile
-# a regular expression
+# define and compile a regular expression
+# Regular Expression Features include:
+# - named groups using (?P<name>)
+# - non-capturing groups using (?:)
+# - custom sets using [a-z] for example
 regexp = re.compile(
     r'(?P<date>\d{1,2}-[A-Z][a-z]{2}-\d{4}) ' +
     '(?P<timestamp>(?:\d{2}:){2}\d{2}\.\d{3}) client ' +
