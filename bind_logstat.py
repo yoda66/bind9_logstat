@@ -8,26 +8,23 @@ import argparse
 class logstats():
 
     def __init__(self, filename, qtype=[], exclude=[],
-                 client=None, domain=None, view=None, topn=5, debug=False):
+                 client=None, domain=None, topn=5, debug=False):
 
         self.filename = filename
         self.exclude = exclude
         self.qtype = qtype
         self.client = client
         self.domain = domain
-        self.view = view
         self.topn = topn
         self.debug = debug
         self.cnt_client = collections.Counter()
         self.cnt_domain = collections.Counter()
         self.cnt_qtype = collections.Counter()
         self.re = re.compile(
-            r'(?P<date>\d{1,2}-[A-Z][a-z]{2}-\d{4}) ' +
-            '(?P<timestamp>(?:\d{2}:){2}\d{2}\.\d{3}) client ' +
-            '(?P<client>(?:\d{1,3}\.){3}\d{1,3}).+view ' +
-            '(?P<view>[a-z]+): query: ' +
-            '(?P<domain>.+) IN ' +
-            '(?P<qtype>[A-Z]+)'
+            r'(?P<timestamp>\d{1,2}-\w{3}-\d{4} \d{2}:\d{2}:\d{2}\.\d{3}) client ' +
+            '(?P<client>(?:\d{1,3}\.){3}\d{1,3}).+query: ' +
+            '(?P<domain>.+) IN (?P<qtype>[A-Z]+) \+.+\({2}' +
+            '(?P<server>(?:\d{1,3}\.){3}\d{1,3})\){2}'
         )
 
     def run(self):
@@ -43,8 +40,6 @@ class logstats():
             if self.client and m.group('client') not in self.client:
                 continue
             if self.domain and m.group('domain') not in self.domain:
-                continue
-            if self.view and m.group('view') not in self.view:
                 continue
 
             self.cnt_client.update([m.group('client')])
@@ -103,10 +98,6 @@ if __name__ == '__main__':
         help='specify domain to filter by'
     )
     parser.add_argument(
-        '--view',
-        help='specify view to filter by'
-    )
-    parser.add_argument(
         '--topn', type=int,
         default=5, help='print top N stats'
     )
@@ -123,7 +114,6 @@ if __name__ == '__main__':
         exclude=args.exclude,
         client=args.client,
         domain=args.domain,
-        view=args.view,
         topn=args.topn,
         debug=args.debug
     )
