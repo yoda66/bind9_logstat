@@ -10,7 +10,7 @@ rexp = r'(?P<timestamp>\d{1,2}-\w{3}-\d{4} \d{2}:\d{2}:\d{2}\.\d{3}) client (?P<
 cnt_domains = Counter()
 
 # read file / gather data
-f = open('bind9.log', 'r')
+f = open('dns.log', 'r')
 matched = 0
 failed = 0
 for line in f:

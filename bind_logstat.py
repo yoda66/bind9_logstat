@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import re
 import collections
@@ -47,11 +47,11 @@ class logstats():
             self.cnt_qtype.update([m.group('qtype')])
 
             if self.debug:
-                print 'client: %s, domain: %s, qtype: %s' % (
+                print('client: %s, domain: %s, qtype: %s' % (
                     m.group('client'),
                     m.group('domain'),
                     m.group('qtype')
-                )
+                ))
 
         fd.close()
         self.print_summary()
@@ -65,18 +65,18 @@ class logstats():
             self.print_counts(self.cnt_qtype, 'query types')
 
     def print_counts(self, cdict, title):
-        print 60 * '-'
-        print ' << Top #%2d %s >>' % (self.topn, title)
-        print 60 * '-'
+        print(60 * '-')
+        print(' << Top #%2d %s >>' % (self.topn, title))
+        print(60 * '-')
         for i, t in enumerate(cdict.most_common(self.topn)):
             if 'domains' in title:
-                print '%2d) %40s: %8d' % (i + 1, t[0][:40], t[1])
+                print('%2d) %40s: %8d' % (i + 1, t[0][:40], t[1]))
             elif 'clients' in title:
-                print '%2d) %15s: %8d' % (i + 1, t[0], t[1])
+                print('%2d) %15s: %8d' % (i + 1, t[0], t[1]))
             else:
-                print '%2d) %6s: %8d' % (i + 1, t[0], t[1])
-        print 60 * '-'
-        print '\r\n'
+                print('%2d) %6s: %8d' % (i + 1, t[0], t[1]))
+        print(60 * '-')
+        print('\r\n')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
