@@ -11,6 +11,3 @@ A simple frequency analysis script for bind9 DNS query logs.  Is able to analyze
 
 **Author: Joff Thyer, May 2017**
 
-
-![BHIS](http://www.blackhillsinfosec.com/wp-content/uploads/2016/03/BHIS-logo-L.png "Black Hills Information Security" =10x10)
-
